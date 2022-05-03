@@ -4,6 +4,8 @@
 #include <pthread.h>
 #include <stdio.h>
 #include "functions.h"
+#include "structures.h"
+
 
 //Main File
 int main(int argc, char** argv) {

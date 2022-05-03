@@ -1,9 +1,5 @@
 #define NUM_THREADS 5
 
-typedef struct MemoryStructure{
-    int data;
-}MemoryStructure;
-
 void runThreads(MemoryStructure* mem_ptr);
 
 void *imageRec(void* mem_ptr);
