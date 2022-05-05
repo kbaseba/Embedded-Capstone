@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <stdio.h>
-#include "functions.h"
 #include "structures.h"
+#include "functions.h"
+
 
 
 //Main File
