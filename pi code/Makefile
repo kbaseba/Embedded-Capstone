@@ -8,7 +8,7 @@ CFLAGS  = -g -Wall
  
 # The build target 
 TARGET = PiRunExe
-OBJS = PiMain.c
+OBJS = PiMain.c threadfunctions.c
  
 all: $(TARGET)
  
