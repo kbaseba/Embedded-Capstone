@@ -38,7 +38,15 @@ void *concatenation(void* mem_ptr) {
 //audioOut:
 //Authers:
 void *audioOut(void* mem_ptr) {
+   int i = 0;
+   while(i <100){
    system("aplay /usr/share/sounds/alsa/Front_Center.wav");
-	printf("Audio Output works \n");
+   i++;
+   delay(1000);
+   }
+
+
+
+   printf("Audio Output works \n");
    pthread_exit(NULL);
 }

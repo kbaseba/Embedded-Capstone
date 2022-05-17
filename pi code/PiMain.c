@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <stdio.h>
+#include <time.h>
 #include "structures.h"
 #include "functions.h"
 #include "threadfunctions.h"
@@ -34,3 +35,14 @@ void runThreads(MemoryStructure* mem_ptr){
     }
 }
 
+//Delay function adapted from https://c-for-dummies.com/blog/?p=69
+void delay(int milliseconds)
+{
+	    long pause;
+	        clock_t now,then;
+
+		    pause = milliseconds*(CLOCKS_PER_SEC/1000);
+		        now = then = clock();
+			    while( (now-then) < pause )
+				            now = clock();
+}

@@ -4,5 +4,5 @@
 #define FUNCTIONS_H_
 
 	void runThreads(MemoryStructure* mem_ptr);
-
+   void delay(int milliseconds);
 #endif
