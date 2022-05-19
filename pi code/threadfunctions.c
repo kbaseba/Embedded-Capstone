@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "structures.h"
 #include "functions.h"
 #include "threadfunctions.h"
@@ -10,43 +11,43 @@
 //imageRec:
 //Authers:
 void *imageRec(void* mem_ptr) {
-   //printf("Image Recognition works \n");
-   pthread_exit(NULL);
+    //printf("Image Recognition Finished \n");
+    pthread_exit(NULL);
 }
 
 //reading:
 //Authers:
 void *reading(void* mem_ptr) {
-   //printf("Reading works \n");
-   pthread_exit(NULL);
+    //printf("Reading Finished \n");
+    pthread_exit(NULL);
 }
 
 //toString:
 //Authers:
 void *toString(void* mem_ptr) {
-   //printf("toString works \n");
-   pthread_exit(NULL);
+    //printf("toString Finished \n");
+    pthread_exit(NULL);
 }
 
 //concatenation:
 //Authers:
 void *concatenation(void* mem_ptr) {
-   //printf("Concatenation works \n");
-   pthread_exit(NULL);
+    //printf("Concatenation Finished \n");
+    pthread_exit(NULL);
 }
 
 //audioOut:
-//Authers:
+//Authers: Cameron McCarty
 void *audioOut(void* mem_ptr) {
-   int i = 0;
-   while(i <100){
-   system("aplay /usr/share/sounds/alsa/Front_Center.wav");
-   i++;
-   delay(1000);
-   }
-
-
-
-   printf("Audio Output works \n");
-   pthread_exit(NULL);
+    int i = 0; // Used to auto stop execution
+    while(i <25){
+       if(mem_ptr->controls_data->distance_on){
+            system("aplay BEEP_SOUND_FILE");
+            delay(1000);
+       } else if(mem_ptr->controls_data->recognition_on){
+            // Play sound recognition audio
+       }
+    }
+    printf("Audio Output Finished \n");
+    pthread_exit(NULL);
 }

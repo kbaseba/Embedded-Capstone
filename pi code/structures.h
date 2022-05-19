@@ -8,7 +8,8 @@
     }StmData;
 
     typedef struct ControlsData{
-        int data;
+        bool distance_on;
+        bool recognition_on;
     }ControlsData;
 
     typedef struct ImageRecData{

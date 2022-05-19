@@ -3,6 +3,8 @@
 #define THREADFUNCTIONS_H_
 
 #define NUM_THREADS 5
+// Sound file used for the distance beep, from https://www.soundjay.com/beep-sounds-1.html
+#define BEEP_SOUND_FILE beep-01a.wav
 
 void *imageRec(void* mem_ptr);
 
