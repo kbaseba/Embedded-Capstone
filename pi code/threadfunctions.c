@@ -11,6 +11,7 @@
 //imageRec:
 //Authers:
 void *imageRec(void* mem_ptr) {
+    MemoryStructure *mem_ptr_ = mem_ptr;
     //printf("Image Recognition Finished \n");
     pthread_exit(NULL);
 }
@@ -18,6 +19,7 @@ void *imageRec(void* mem_ptr) {
 //reading:
 //Authers:
 void *reading(void* mem_ptr) {
+    MemoryStructure *mem_ptr_ = mem_ptr;
     //printf("Reading Finished \n");
     pthread_exit(NULL);
 }
@@ -25,6 +27,7 @@ void *reading(void* mem_ptr) {
 //toString:
 //Authers:
 void *toString(void* mem_ptr) {
+    MemoryStructure *mem_ptr_ = mem_ptr;
     //printf("toString Finished \n");
     pthread_exit(NULL);
 }
@@ -32,6 +35,7 @@ void *toString(void* mem_ptr) {
 //concatenation:
 //Authers:
 void *concatenation(void* mem_ptr) {
+    MemoryStructure *mem_ptr_ = mem_ptr;
     //printf("Concatenation Finished \n");
     pthread_exit(NULL);
 }
@@ -39,12 +43,16 @@ void *concatenation(void* mem_ptr) {
 //audioOut:
 //Authers: Cameron McCarty
 void *audioOut(void* mem_ptr) {
+    MemoryStructure *mem_ptr_ = mem_ptr;
+    //mem_ptr = (MemoryStructure*)mem_ptr;
+
+
     int i = 0; // Used to auto stop execution
     while(i <25){
-       if(mem_ptr->controls_data->distance_on){
+       if(mem_ptr_->controls_data->distance_on){
             system("aplay BEEP_SOUND_FILE");
             delay(1000);
-       } else if(mem_ptr->controls_data->recognition_on){
+       } else if(mem_ptr_->controls_data->recognition_on){
             // Play sound recognition audio
        }
     }

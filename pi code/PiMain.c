@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <time.h>
+#include <stdbool.h>
 #include "structures.h"
 #include "functions.h"
 #include "threadfunctions.h"
