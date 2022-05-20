@@ -4,7 +4,8 @@
 #define STRUCTURES_H_
 
     typedef struct StmData{
-        int data;
+        double distance;
+        double temperature;
     }StmData;
 
     typedef struct ControlsData{
