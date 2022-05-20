@@ -11,6 +11,8 @@
 
 int main(int argc, char** argv) {
 
+    init_py_env();
+
     struct MemoryStructure* mem_ptr = malloc(sizeof(struct MemoryStructure));
 
     runThreads(mem_ptr);
@@ -18,6 +20,13 @@ int main(int argc, char** argv) {
     free(mem_ptr);
     return 0;
 }
+
+//init_py_env: Runs the script to setup the correct python enviroment
+//Authers: 
+void init_py_env(){
+
+}
+
 
 //runThreads: Dispatches each thread function given in *threadTasks[]
 //Authers: Cameron McCarty, Zexuan Li
