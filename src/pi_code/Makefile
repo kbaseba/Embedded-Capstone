@@ -9,7 +9,7 @@ CFLAGS  = -g -Wall
 # The build target 
 TARGET = RunHorus
 TEST = TestHorus
-PATH_TO_RUN = ../../run/
+PATH_TO_RUN = /usr/local/
 OBJS = PiMain.c threadfunctions.c
  
 all: $(TARGET)
