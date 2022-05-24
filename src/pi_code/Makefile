@@ -7,14 +7,21 @@ CC = gcc
 CFLAGS  = -g -Wall
  
 # The build target 
-TARGET = PiRunExe
+TARGET = RunHorus
+TEST = TestHorus
+PATH_TO_RUN = ../../run/
 OBJS = PiMain.c threadfunctions.c
  
 all: $(TARGET)
  
 $(TARGET): $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) -o $(TARGET) -lpthread
+	$(CC) $(OBJS) $(CFLAGS) -o $(PATH_TO_RUN)$(TARGET) -lpthread
 
+$(TEST): $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) -o $(TEST) -lpthread
 
 clean:
-	$(RM) $(TARGET)
+	$(RM) $(PATH_TO_RUN)$(TARGET)
+
+testclean:
+	$(RM) $(TEST)
