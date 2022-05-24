@@ -60,7 +60,7 @@ void *audioOut(void* mem_ptr) {
     int i = 0; // Used to auto stop execution
     while(i <250){
        if(mem_ptr_->controls_data.distance_on){
-            system("aplay -q beep-01a.wav");
+            system("aplay -q /usr/local/bin/horus-res/beep-01a.wav");
             delay(100 * mem_ptr_->stm_data.distance);
        } else if(mem_ptr_->controls_data.recognition_on){
             // Play sound recognition audio
