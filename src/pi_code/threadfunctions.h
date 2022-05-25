@@ -6,7 +6,7 @@
 // Sound file used for the distance beep, from https://www.soundjay.com/beep-sounds-1.html
 //#define BEEP_SOUND_FILE "beep-01a.wav"
 
-void *imageRec(void* mem_ptr);
+void *objectRec(void* mem_ptr);
 
 void *reading(void* mem_ptr);
 

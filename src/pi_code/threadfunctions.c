@@ -11,8 +11,15 @@
 
 //imageRec:
 //Authers:
-void *imageRec(void* mem_ptr) {
+void *objectRec(void* mem_ptr) {
     MemoryStructure *mem_ptr_ = mem_ptr;
+    // Start recognition script
+    //while
+        //if control is off
+            //end/halt process
+        //else
+            //start/resume
+
     //printf("Image Recognition Finished \n");
     pthread_exit(NULL);
 }
