@@ -46,17 +46,20 @@ if args.usbcam:
     camera_type = 'usb'
 
 # This is needed since the working directory is the object_detection folder.
-sys.path.append('..')
+# sys.path.append('..')
 
 # Import utilites
-from object_detection.utils import label_map_util
-from object_detection.utils import visualization_utils as vis_util
+import tensorflow1.models.research.object_detection.utils.visualization_utils as vis_util
+import tensorflow1.models.research.object_detection.utils.label_map_util as label_map_util
+# from .utils import label_map_util
+# from .utils import visualization_utils as vis_util
 
 # Name of the directory containing the object detection module we're using
 MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'
 
 # Grab path to current working directory
-CWD_PATH = os.getcwd()
+# CWD_PATH = os.getcwd()
+CWD_PATH = "/home/rahul025/Desktop/project/tensorflow1/models/research/object_detection/"
 
 # Path to frozen detection graph .pb file, which contains the model that is used
 # for object detection.
@@ -157,6 +160,7 @@ if camera_type == 'picamera':
             use_normalized_coordinates=True,
             line_thickness=8,
             min_score_thresh=0.40)
+                                
         
 #        print("Object detected: ", classes)
 #        class_name = category_index[classes]
@@ -167,7 +171,6 @@ if camera_type == 'picamera':
 #            engine.say("Object detected: ", classes)
 #           engine.runAndWait()
 #        }
-#        print(category_index)
         
 #        for i in classes:
 #            print(i)
