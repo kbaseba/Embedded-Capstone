@@ -32,7 +32,7 @@ void init_py_env(){
 //Authers: Cameron McCarty, Zexuan Li
 void runThreads(MemoryStructure* mem_ptr){
 
-   void *(*threadTasks[NUM_THREADS])(void*) = {imageRec, reading, toString, concatenation, audioOut};   
+   void *(*threadTasks[NUM_THREADS])(void*) = {objectRec, reading, toString, concatenation, audioOut};   
     pthread_t thread_ids[NUM_THREADS];
     int i;
     for(i=0;i<NUM_THREADS;i++){
