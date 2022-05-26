@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 //init_py_env: Runs the script to setup the correct python enviroment
 //Authers: 
 void init_py_env(){
-    system("source /usr/local/lib/horus-res/project/env/bin/activate");
+    system("source /usr/local/lib/horus-res/project/env/bin/activate && python --version");
 }
 
 

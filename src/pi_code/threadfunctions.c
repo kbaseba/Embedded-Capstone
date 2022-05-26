@@ -12,9 +12,9 @@
 //imageRec:
 //Authers:
 void *objectRec(void* mem_ptr) {
-    MemoryStructure *mem_ptr_ = mem_ptr;
+    //MemoryStructure *mem_ptr_ = mem_ptr;
     // Start recognition script
-    system("python /usr/local/lib/horus-res/project/Object_Detection_Picamera.py");
+    //system("python /usr/local/lib/horus-res/project/Object_Detection_Picamera.py");
     //while
         //if control is off
             //end/halt process
@@ -47,7 +47,7 @@ void *reading(void* mem_ptr) {
 //toString:
 //Authers:
 void *toString(void* mem_ptr) {
-    MemoryStructure *mem_ptr_ = mem_ptr;
+    //MemoryStructure *mem_ptr_ = mem_ptr;
     //printf("toString Finished \n");
     pthread_exit(NULL);
 }
@@ -55,7 +55,7 @@ void *toString(void* mem_ptr) {
 //concatenation:
 //Authers:
 void *concatenation(void* mem_ptr) {
-    MemoryStructure *mem_ptr_ = mem_ptr;
+    //MemoryStructure *mem_ptr_ = mem_ptr;
     //printf("Concatenation Finished \n");
     pthread_exit(NULL);
 }
