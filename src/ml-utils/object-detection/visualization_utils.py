@@ -1178,7 +1178,6 @@ def visualize_boxes_and_labels_on_image_array(
   # Initialize text-to-speech
   engine = pyttsx3.init()
   
-  
   # Create a display string (and color) for every box location, group any boxes
   # that correspond to the same location.
   box_to_display_str_map = collections.defaultdict(list)
@@ -1216,9 +1215,11 @@ def visualize_boxes_and_labels_on_image_array(
             else:
               class_name = 'N/A'
             display_str = str(class_name)
-            # print("Object found: ", display_str)
-            # engine.say("Object found: ", display_str)
-            engine.say("Hello World this is your captain speaking.")
+            # print(display_str)
+            audio_out = "Object found: " + display_str
+            print("Object found: ", display_str)
+            engine.say(audio_out)
+            # engine.say("Hello World this is your captain speaking.")
             engine.runAndWait()
         if not skip_scores:
           if not display_str:
@@ -1283,7 +1284,7 @@ def visualize_boxes_and_labels_on_image_array(
           keypoint_edges=keypoint_edges,
           keypoint_edge_color=color,
           keypoint_edge_width=line_thickness // 2)
-
+    
   return image
 
 
