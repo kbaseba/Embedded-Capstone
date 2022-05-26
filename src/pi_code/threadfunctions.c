@@ -14,7 +14,7 @@
 void *objectRec(void* mem_ptr) {
     MemoryStructure *mem_ptr_ = mem_ptr;
     // Start recognition script
-    system("source /usr/local/lib/horus-res/project/Object_Detection_Picamera.py");
+    system("python /usr/local/lib/horus-res/project/Object_Detection_Picamera.py");
     //while
         //if control is off
             //end/halt process
