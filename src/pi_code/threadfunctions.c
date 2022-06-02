@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <errno.h>
+#include <wiringSerial.h>
 #include "structures.h"
 #include "functions.h"
 #include "threadfunctions.h"
@@ -30,6 +32,78 @@ void *objectRec(void* mem_ptr) {
 void *reading(void* mem_ptr) {
     MemoryStructure *mem_ptr_ = mem_ptr;
 
+    int fd;
+
+    // Check if serial port is open
+    if ((fd = serialOpen("/dev/ttyS0", 115200)) < 0) {
+        fprinf(stderr, "Unable to open serial device: %s\n", strerror(errno));
+        return 1;
+    }
+
+    // Loop to parce serial data for struct
+    for(;;){
+
+        // create buffer to store line
+        char buff[64];
+
+        // Read serial data into buffer
+        read(fd, buff, 8);
+
+        // distance buffer
+        char dist[10];
+
+        // camera on buffer
+        char range[10];
+
+        // dist sensor on buffer
+        char cam[10];
+
+        for(int i = 0; i < 64; i++) {
+            if (buff[i] == ":") {
+                char dist[10];
+                i = i + 2;
+
+                int j = 0;
+                while (buff[i] != " ") {
+                    dist[j] = buff[i];
+                    i++;
+                    j++;
+                }
+                dist[i] = "\0";
+
+                i = i + 16;
+
+                int k = 0;
+                while (buff[i] != " ") {
+                    range[k] = buff[i];
+                    i++;
+                    k++;
+                }
+                range[k] = "\0";
+
+                i = i + 17;
+
+                int z = 0;
+                while (buff[i] != " ") {
+                    cam[z] = buff[i];
+                    i++;
+                    z++;
+                }
+                cam[z] = "\0";
+
+                break;
+            }
+        }
+        
+
+        // For testing
+        printf("%s", buff);
+        printf("%s", dist);
+        printf("%s", range);
+        printf("%s", cam);
+        printf("Reading Finished \n");
+    }
+
     //Hardcoding data for testing
     mem_ptr_->controls_data.distance_on    = true;
     mem_ptr_->controls_data.recognition_on = false;
@@ -40,27 +114,8 @@ void *reading(void* mem_ptr) {
        i++;
     }
 
-    printf("Reading Finished \n");
-    pthread_exit(NULL);
+    // pthread_exit(NULL);
 }
-
-/*
-//toString:
-//Authers:
-void *toString(void* mem_ptr) {
-    //MemoryStructure *mem_ptr_ = mem_ptr;
-    //printf("toString Finished \n");
-    pthread_exit(NULL);
-}
-
-//concatenation:
-//Authers:
-void *concatenation(void* mem_ptr) {
-    //MemoryStructure *mem_ptr_ = mem_ptr;
-    //printf("Concatenation Finished \n");
-    pthread_exit(NULL);
-}
-*/
 
 
 //audioOut:
@@ -68,8 +123,7 @@ void *concatenation(void* mem_ptr) {
 void *audioOut(void* mem_ptr) {
     MemoryStructure *mem_ptr_ = mem_ptr;
 
-    int i = 0; // Used to auto stop execution
-    while(i <250){
+    while(1){
        if(mem_ptr_->controls_data.distance_on){
             system("aplay -q /usr/local/lib/horus-res/sound/beep-01a.wav");
             delay(100 * mem_ptr_->stm_data.distance);
