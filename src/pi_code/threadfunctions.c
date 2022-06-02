@@ -33,6 +33,10 @@ void *reading(void* mem_ptr) {
     MemoryStructure *mem_ptr_ = mem_ptr;
 
     int fd;
+    double range;
+    bool range_on, camera_on;
+    int j, k;
+
 
     // Check if serial port is open
     if ((fd = serialOpen("/dev/ttyS0", 115200)) < 0) {
@@ -44,64 +48,51 @@ void *reading(void* mem_ptr) {
     for(;;){
 
         // create buffer to store line
-        char buff[64];
+        char buff[100];
 
         // Read serial data into buffer
-        read(fd, buff, 8);
+        read(fd, buff, 10);
 
-        // distance buffer
-        char dist[10];
+        double range;
+        bool range_on, camera_on;
+        int j, k;
 
-        // camera on buffer
-        char range[10];
-
-        // dist sensor on buffer
-        char cam[10];
-
-        for(int i = 0; i < 64; i++) {
-            if (buff[i] == ":") {
-                char dist[10];
-                i = i + 2;
-
-                int j = 0;
-                while (buff[i] != " ") {
-                    dist[j] = buff[i];
-                    i++;
-                    j++;
-                }
-                dist[i] = "\0";
-
-                i = i + 16;
-
-                int k = 0;
-                while (buff[i] != " ") {
-                    range[k] = buff[i];
-                    i++;
-                    k++;
-                }
-                range[k] = "\0";
-
-                i = i + 17;
-
-                int z = 0;
-                while (buff[i] != " ") {
-                    cam[z] = buff[i];
-                    i++;
-                    z++;
-                }
-                cam[z] = "\0";
-
-                break;
+        for(int i=0; i<sizeof(string); i++){
+            if(string[i]=='e' & string[i+1]=='_' & string[i+8]=='t'){
+                printf("%s\n", "range_on is true");
+                range_on = 1;
+                j = i-9;
+            }else if(string[i]=='e' & string[i+1]=='_' & string[i+8]=='f'){
+                printf("%s\n", "range_on is false");
+                range_on = 0;
+                j = i-9;
+            }
+            
+            if(string[i]=='a' & string[i+1]=='_' & string[i+8]=='t'){
+                printf("%s\n", "camera_on is true");
+                camera_on = 1;
+            }else if(string[i]=='a' & string[i+1]=='_' & string[i+8]=='f'){
+                printf("%s\n", "camera_on is false");
+                camera_on = 0;
+            }
+            
+            if(string[i]=='e' & string[i+2]==' ' & string[i+3]==':'){
+                k = i+5;
             }
         }
         
 
-        // For testing
-        printf("%s", buff);
-        printf("%s", dist);
-        printf("%s", range);
-        printf("%s", cam);
-        printf("Reading Finished \n");
+        char rangeString[j-k+1];
+        for(int n=0; n<sizeof(rangeString); n++){
+            rangeString[n] = string[k+n];
+        }
+        printf("%s\n", rangeString);
+        
+        sscanf(rangeString, "%lf", &range);
+        printf("%lf\n", range);
+        printf("%d\n", range_on);
+        printf("%d\n", camera_on);
+
     }
 
     //Hardcoding data for testing
