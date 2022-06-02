@@ -44,6 +44,7 @@ void *reading(void* mem_ptr) {
     pthread_exit(NULL);
 }
 
+/*
 //toString:
 //Authers:
 void *toString(void* mem_ptr) {
@@ -59,6 +60,8 @@ void *concatenation(void* mem_ptr) {
     //printf("Concatenation Finished \n");
     pthread_exit(NULL);
 }
+*/
+
 
 //audioOut:
 //Authers: Cameron McCarty
