@@ -1,19 +1,16 @@
 ######## Picamera Object Detection Using Tensorflow Classifier #########
-#
+
+# Author: Rahul Pulidindi
+
 # This program uses a TensorFlow classifier to perform object detection.
 # It loads the classifier uses it to perform object detection on a Picamera feed.
 # It draws boxes and scores around the objects of interest in each frame from
 # the Picamera. It also can be used with a webcam by adding "--usbcam"
 # when executing this script from the terminal.
 
-## Some of the code is copied from Google's example at
+## Contributors: 
 ## https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb
-
-## and some is copied from Dat Tran's example at
 ## https://github.com/datitran/object_detector_app/blob/master/object_detection_app.py
-
-## but I changed it to make it more understandable to me.
-
 
 # Import packages
 import os
@@ -121,10 +118,6 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 # The camera has to be set up and used differently depending on if it's a
 # Picamera or USB webcam.
 
-# I know this is ugly, but I basically copy+pasted the code for the object
-# detection loop twice, and made one work for Picamera and the other work
-# for USB.
-
 ### Picamera ###
 if camera_type == 'picamera':
     # Initialize Picamera and grab reference to the raw capture
@@ -160,30 +153,10 @@ if camera_type == 'picamera':
             use_normalized_coordinates=True,
             line_thickness=8,
             min_score_thresh=0.40)
-                                
-        
-#        print("Object detected: ", classes)
-#        class_name = category_index[classes]
-
-# AUDIO WORKS!!! Need to get the classes right, however.
-
-#        if (!engine.isBusy()) {
-#            engine.say("Object detected: ", classes)
-#           engine.runAndWait()
-#        }
-        
-#        for i in classes:
-#            print(i)
-#            if i in category_index.keys():
-#                class_name = category_index[i]['name']
-#                print(class_name)
-
-            
-            
-        
+                                            
         cv2.putText(frame,"FPS: {0:.2f}".format(frame_rate_calc),(30,50),font,1,(255,255,0),2,cv2.LINE_AA)
 
-        # All the results have been drawn on the frame, so it's time to display it.
+        # Display results
         cv2.imshow('Object detector', frame)
 
         t2 = cv2.getTickCount()
@@ -233,7 +206,7 @@ elif camera_type == 'usb':
 
         cv2.putText(frame,"FPS: {0:.2f}".format(frame_rate_calc),(30,50),font,1,(255,255,0),2,cv2.LINE_AA)
         
-        # All the results have been drawn on the frame, so it's time to display it.
+        # Display results
         cv2.imshow('Object detector', frame)
 
         t2 = cv2.getTickCount()
