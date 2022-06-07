@@ -12,8 +12,7 @@
 #include "functions.h"
 #include "threadfunctions.h"
 
-//imageRec:
-//Authers:
+//From threadfunctions.h
 void *objectRec(void* mem_ptr) {
     //MemoryStructure *mem_ptr_ = mem_ptr;
     // Start recognition script
@@ -28,14 +27,12 @@ void *objectRec(void* mem_ptr) {
     pthread_exit(NULL);
 }
 
-//reading:
-//Authers:
+//From threadfunctions.h
 void *reading(void* mem_ptr) {
     MemoryStructure *mem_ptr_ = mem_ptr;
 	
     int fd;
 	
-
     // Check if serial port is open
     if ((fd = serialOpen("/dev/ttyS0", 115200)) < 0) {
         fprintf(stderr, "Unable to open serial device: %s\n", strerror(errno));
@@ -49,22 +46,25 @@ void *reading(void* mem_ptr) {
         // Read serial data into buffer
         //read(fd, buff, 100);
 
-		
-	int t = 0;
-	bool validdata = false;
-	buff[0] = 'x';
+        // Build a string with incoming characters, stopping only if found end of JSON,
+        // or if to many charachters for the string.
+        int t = 0;// Caracter index
+        bool validdata = false; // Whether the JSON start char has found 
+        buff[0] = 'x'; // Default first character of buffer
+        while(buff[t] != '}' && t < 66) {
+            // Store character in current position
+            buff[t] = putchar(serialGetchar(fd));
+            //Only increment position if the start of a valid JSON is found,
+            // or if it has been previously found
+            if(validdata || buff[t] == '{'){
+                validdata = true;
+                    t++;
+            }
+        }
 
-	    while(buff[t] != '}' && t < 66) {
-		
-	        buff[t] = putchar(serialGetchar(fd));
-		if(validdata || buff[t] == '{'){
-		    validdata = true;
-	            t++;
-		}
-    	    }
+	    //printf("%s", buff);
 
-	//printf("%s", buff);
-
+        // Parse the JSON string for tags, and save the data
         double range;
         bool range_on, camera_on;
         int j, k;
@@ -93,7 +93,6 @@ void *reading(void* mem_ptr) {
             }
         }
         
-
         char rangeString[j-k+1];
         for(int n=0; n<sizeof(rangeString); n++){
             rangeString[n] = buff[k+n];
@@ -105,19 +104,15 @@ void *reading(void* mem_ptr) {
         //printf("%d\n", range_on);
         //printf("%d\n", camera_on);
 
-	
+        // Save the data to memory
         mem_ptr_->controls_data.distance_on    = range_on;
         mem_ptr_->controls_data.recognition_on = camera_on;
         mem_ptr_->stm_data.distance = range;
     }
-
-
     // pthread_exit(NULL);
 }
 
-
-//audioOut:
-//Authers: Cameron McCarty
+//From threadfunctions.h
 void *audioOut(void* mem_ptr) {
     MemoryStructure *mem_ptr_ = mem_ptr;
 
@@ -129,6 +124,5 @@ void *audioOut(void* mem_ptr) {
             // Play sound recognition audio
        }
     }
-    printf("Audio Output Finished \n");
     pthread_exit(NULL);
 }
