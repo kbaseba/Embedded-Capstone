@@ -13,6 +13,9 @@
 # limitations under the License.
 # ==============================================================================
 
+# Author: Rahul Pulidindi 
+# Added audio output in visualize_boxes_and_labels_on_image_array()
+
 """A set of functions that are used for visualization.
 
 These functions often receive an image, perform some visualization on the image.
